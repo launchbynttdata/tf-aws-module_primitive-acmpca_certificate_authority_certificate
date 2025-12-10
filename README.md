@@ -1,0 +1,1 @@
+# tf-aws-module_primitive-acmpca_certificate_authority_certificate
