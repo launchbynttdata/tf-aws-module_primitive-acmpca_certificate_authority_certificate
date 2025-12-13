@@ -402,7 +402,7 @@ terraform destroy -var-file=test.tfvars
 
 After initialization, your module should have this structure:
 
-```
+```text
 tf-aws-module_primitive-<resource_name>/
 ├── .github/
 │   └── workflows/          # CI/CD workflows

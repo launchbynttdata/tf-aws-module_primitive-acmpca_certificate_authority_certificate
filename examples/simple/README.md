@@ -27,6 +27,7 @@ terraform destroy -var-file=test.tfvars
 ## Notes
 
 This example creates its own test resources for demonstration purposes. In production, you would typically:
+
 1. Have an existing Certificate Authority
 2. Issue a certificate for it using `aws_acmpca_certificate`
 3. Use this module to install the certificate on the CA
