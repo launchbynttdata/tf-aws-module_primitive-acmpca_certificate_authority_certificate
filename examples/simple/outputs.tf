@@ -10,17 +10,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-output "account_id" {
-  description = "AWS Account ID"
-  value       = module.hello.account_id
+output "certificate" {
+  description = "PEM-encoded certificate for the Certificate Authority"
+  value       = module.certificate_authority_certificate.certificate
 }
 
-output "arn" {
-  description = "AWS Caller Identity ARN"
-  value       = module.hello.arn
+output "certificate_authority_arn" {
+  description = "ARN of the Certificate Authority"
+  value       = module.certificate_authority_certificate.certificate_authority_arn
 }
 
-output "hello_message" {
-  description = "Hello message"
-  value       = module.hello.hello_message
+output "certificate_chain" {
+  description = "PEM-encoded certificate chain"
+  value       = module.certificate_authority_certificate.certificate_chain
+}
+
+output "id" {
+  description = "ARN of the certificate"
+  value       = module.certificate_authority_certificate.id
 }

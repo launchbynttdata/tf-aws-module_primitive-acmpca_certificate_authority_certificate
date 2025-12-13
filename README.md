@@ -1,26 +1,68 @@
 # tf-aws-module_primitive-acmpca_certificate_authority_certificate
 
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Terraform](https://img.shields.io/badge/terraform-1.5.x-623CE4.svg)](https://www.terraform.io)
+
+## Overview
+
+This Terraform module provides a primitive wrapper around the `aws_acmpca_certificate_authority_certificate` resource, which installs a certificate on an AWS Certificate Manager Private Certificate Authority (ACM PCA).
+
+This resource is used to associate a CA certificate with a Private Certificate Authority. This is typically used after issuing a certificate for the CA using the `aws_acmpca_certificate` resource.
+
+## Features
+
+- **Simple Installation**: Install CA certificates on ACM Private Certificate Authorities
+- **Root and Subordinate CA Support**: Works with both root and subordinate Certificate Authorities
+- **Certificate Chain Management**: Optional certificate chain for subordinate CAs
+- **Full Resource Access**: All resource attributes exposed as outputs
+- **Comprehensive Testing**: Validates actual AWS resource state using AWS SDK
+
+## Usage
+
+### Basic Example
+
+```hcl
+module "certificate_authority_certificate" {
+  source = "launchbynttdata/module_primitive-acmpca_certificate_authority_certificate/aws"
+
+  certificate_authority_arn = aws_acmpca_certificate_authority.example.arn
+  certificate               = aws_acmpca_certificate.example.certificate
+  certificate_chain         = aws_acmpca_certificate.example.certificate_chain # Optional, for subordinate CAs
+}
+```
+
+### Complete Example with Root CA
+
+See [examples/simple](examples/simple/) for a complete working example that creates a test Certificate Authority and installs a certificate on it.
+
+## When to Use This Module
+
+Use this module when you need to:
+
+- Install a CA certificate on an ACM Private Certificate Authority
+- Complete the setup of a new Certificate Authority after issuing its certificate
+- Manage CA certificates separately from CA creation for better modularity
+
+## Prerequisites
+
+- An existing AWS Certificate Manager Private Certificate Authority
+- A certificate issued for that Certificate Authority (using `aws_acmpca_certificate`)
+
 ---
 
 ## What is a Primitive Module?
 
 A **primitive module** is a thin, focused Terraform wrapper around a single AWS resource type. Primitive modules:
 
-- Wrap a **single AWS resource** (e.g., `aws_eks_cluster`, `aws_kms_key`, `aws_s3_bucket`)
+- Wrap a **single AWS resource** (in this case, `aws_acmpca_certificate_authority_certificate`)
 - Provide sensible defaults while maintaining full configurability
-- Include comprehensive validation rules
-- Follow consistent patterns for inputs, outputs, and tagging
+- Follow consistent patterns for inputs, outputs, and validation
 - Include automated testing using Terratest
 - Serve as building blocks for higher-level composite modules
 
-For examples of well-structured primitive modules, see:
-
-- [tf-aws-module_primitive-eks_cluster](https://github.com/launchbynttdata/tf-aws-module_primitive-eks_cluster)
-- [tf-aws-module_primitive-kms_key](https://github.com/launchbynttdata/tf-aws-module_primitive-kms_key)
-
 ---
 
-## Getting Started with This Template
+## Getting Started with Development
 
 ### 1. Create Your New Module Repository
 
@@ -447,19 +489,22 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
+| [aws_acmpca_certificate_authority_certificate.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acmpca_certificate_authority_certificate) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_hello_message"></a> [hello\_message](#input\_hello\_message) | A friendly hello message. | `string` | `"Hello, Terraform!"` | no |
+| <a name="input_certificate"></a> [certificate](#input\_certificate) | (Required) PEM-encoded certificate for the Certificate Authority. See https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acmpca_certificate_authority_certificate#certificate | `string` | n/a | yes |
+| <a name="input_certificate_authority_arn"></a> [certificate\_authority\_arn](#input\_certificate\_authority\_arn) | (Required) ARN of the Certificate Authority. See https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acmpca_certificate_authority_certificate#certificate_authority_arn | `string` | n/a | yes |
+| <a name="input_certificate_chain"></a> [certificate\_chain](#input\_certificate\_chain) | (Optional) PEM-encoded certificate chain that includes any intermediate certificates and chains up to root CA. Required for subordinate Certificate Authorities. See https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acmpca_certificate_authority_certificate#certificate_chain | `string` | `null` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_account_id"></a> [account\_id](#output\_account\_id) | n/a |
-| <a name="output_arn"></a> [arn](#output\_arn) | n/a |
-| <a name="output_hello_message"></a> [hello\_message](#output\_hello\_message) | n/a |
+| <a name="output_certificate"></a> [certificate](#output\_certificate) | PEM-encoded certificate for the Certificate Authority |
+| <a name="output_certificate_authority_arn"></a> [certificate\_authority\_arn](#output\_certificate\_authority\_arn) | ARN of the Certificate Authority |
+| <a name="output_certificate_chain"></a> [certificate\_chain](#output\_certificate\_chain) | PEM-encoded certificate chain |
+| <a name="output_id"></a> [id](#output\_id) | ARN of the certificate |
 <!-- END_TF_DOCS -->

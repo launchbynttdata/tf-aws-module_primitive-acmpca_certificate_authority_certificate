@@ -98,6 +98,21 @@ Follow this standardized module structure:
   - Include brief descriptions of what changed and why when relevant
 - Do not create individual change documentation files.
 
+### Documentation Update Requirements
+
+**Always update when making changes:**
+
+- **README.md** (root and example directories):
+  - Add/update when adding new variables or outputs
+  - Update examples when changing resource configuration
+  - Update feature descriptions when adding capabilities
+  - Refresh terraform-docs generated sections (runs automatically via pre-commit)
+
+- **CHANGELOG.md** (root only):
+  - Document every functional change before committing
+  - Include rationale for breaking changes
+  - Reference related issues or PRs when applicable
+
 ## Terraform Primitive Module Development
 
 ### Design Principles
@@ -202,7 +217,12 @@ The agent may modify:
 - **Root directory**: All `.tf` files (main.tf, variables.tf, outputs.tf, locals.tf, versions.tf)
 - **Examples**: All files within `/examples/` subdirectories
 - **Tests**: Only `/tests/testimpl/test_impl.go` and `/tests/testimpl/types.go`
-- **Documentation**: README.md and CHANGELOG.md when changes directly relate to module functionality (including new variables, test coverage changes, or functional modifications)
+- **Documentation**: README.md and CHANGELOG.md **must be updated** when:
+  - Adding, removing, or modifying variables or outputs
+  - Changing module behavior or functionality
+  - Adding or updating test coverage
+  - Modifying example implementations
+  - Fixing bugs or addressing security issues
 
 The agent must NOT modify:
 

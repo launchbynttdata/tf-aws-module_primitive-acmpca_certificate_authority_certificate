@@ -1,12 +1,13 @@
 # Simple Example
 
-This example provides a basic test case for the `tf-aws-module_primitive-vpc_security_group_ingress_rule` module, used primarily for integration testing.
+This example demonstrates minimal usage of the `tf-aws-module_primitive-acmpca_certificate_authority_certificate` module by creating a test Certificate Authority and installing a certificate on it.
 
 ## Features
 
-- Single SSH ingress rule (port 22)
-- IPv4 CIDR source
-- Basic configuration
+- Creates a test Root Certificate Authority
+- Issues a certificate for the Certificate Authority
+- Installs the certificate on the CA using the module
+- Demonstrates the complete CA setup workflow
 
 ## Usage
 
@@ -19,9 +20,16 @@ terraform destroy -var-file=test.tfvars
 
 ## Resources Created
 
-- 1 VPC
-- 1 Security Group
-- 1 Security Group Ingress Rule
+- 1 ACM Private Certificate Authority (test CA)
+- 1 ACM PCA Certificate (for the CA)
+- 1 ACM PCA Certificate Authority Certificate (installed via module)
+
+## Notes
+
+This example creates its own test resources for demonstration purposes. In production, you would typically:
+1. Have an existing Certificate Authority
+2. Issue a certificate for it using `aws_acmpca_certificate`
+3. Use this module to install the certificate on the CA
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
@@ -33,29 +41,37 @@ terraform destroy -var-file=test.tfvars
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.100.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_hello"></a> [hello](#module\_hello) | ../../ | n/a |
+| <a name="module_certificate_authority_certificate"></a> [certificate\_authority\_certificate](#module\_certificate\_authority\_certificate) | ../../ | n/a |
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [aws_acmpca_certificate.test](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acmpca_certificate) | resource |
+| [aws_acmpca_certificate_authority.test](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acmpca_certificate_authority) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_hello_message"></a> [hello\_message](#input\_hello\_message) | A friendly hello message. | `string` | `"Hello, Terraform!"` | no |
+| <a name="input_certificate"></a> [certificate](#input\_certificate) | PEM-encoded certificate for the Certificate Authority | `string` | `""` | no |
+| <a name="input_certificate_authority_arn"></a> [certificate\_authority\_arn](#input\_certificate\_authority\_arn) | ARN of the Certificate Authority | `string` | `""` | no |
+| <a name="input_certificate_chain"></a> [certificate\_chain](#input\_certificate\_chain) | PEM-encoded certificate chain | `string` | `null` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_account_id"></a> [account\_id](#output\_account\_id) | AWS Account ID |
-| <a name="output_arn"></a> [arn](#output\_arn) | AWS Caller Identity ARN |
-| <a name="output_hello_message"></a> [hello\_message](#output\_hello\_message) | Hello message |
+| <a name="output_certificate"></a> [certificate](#output\_certificate) | PEM-encoded certificate for the Certificate Authority |
+| <a name="output_certificate_authority_arn"></a> [certificate\_authority\_arn](#output\_certificate\_authority\_arn) | ARN of the Certificate Authority |
+| <a name="output_certificate_chain"></a> [certificate\_chain](#output\_certificate\_chain) | PEM-encoded certificate chain |
+| <a name="output_id"></a> [id](#output\_id) | ARN of the certificate |
 <!-- END_TF_DOCS -->

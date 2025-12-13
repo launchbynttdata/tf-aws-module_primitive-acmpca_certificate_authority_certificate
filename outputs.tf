@@ -1,11 +1,31 @@
-output "account_id" {
-  value = data.aws_caller_identity.current.account_id
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+output "certificate" {
+  description = "PEM-encoded certificate for the Certificate Authority"
+  value       = aws_acmpca_certificate_authority_certificate.this.certificate
 }
 
-output "arn" {
-  value = data.aws_caller_identity.current.arn
+output "certificate_authority_arn" {
+  description = "ARN of the Certificate Authority"
+  value       = aws_acmpca_certificate_authority_certificate.this.certificate_authority_arn
 }
 
-output "hello_message" {
-  value = local.hello_message
+output "certificate_chain" {
+  description = "PEM-encoded certificate chain"
+  value       = aws_acmpca_certificate_authority_certificate.this.certificate_chain
+}
+
+output "id" {
+  description = "ARN of the certificate"
+  value       = aws_acmpca_certificate_authority_certificate.this.id
 }

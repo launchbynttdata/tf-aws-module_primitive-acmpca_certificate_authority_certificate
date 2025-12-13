@@ -10,8 +10,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-variable "hello_message" {
-  description = "A friendly hello message."
+variable "certificate" {
+  description = "PEM-encoded certificate for the Certificate Authority"
   type        = string
-  default     = "Hello, Terraform!"
+  default     = ""
+}
+
+variable "certificate_authority_arn" {
+  description = "ARN of the Certificate Authority"
+  type        = string
+  default     = ""
+}
+
+variable "certificate_chain" {
+  description = "PEM-encoded certificate chain"
+  type        = string
+  default     = null
 }
