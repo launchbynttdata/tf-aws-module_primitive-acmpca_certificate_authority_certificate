@@ -22,7 +22,7 @@ output "certificate_authority_arn" {
 
 output "certificate_chain" {
   description = "PEM-encoded certificate chain"
-  value       = module.certificate_authority_certificate.certificate_chain
+  value       = module.certificate_authority_certificate.certificate_chain != "" ? module.certificate_authority_certificate.certificate_chain : null
 }
 
 output "id" {
