@@ -27,3 +27,45 @@ variable "certificate_chain" {
   type        = string
   default     = null
 }
+
+variable "certificate_authority_type" {
+  description = "Type of the Certificate Authority"
+  type        = string
+  default     = "ROOT"
+}
+
+variable "key_algorithm" {
+  description = "Key algorithm for the Certificate Authority"
+  type        = string
+  default     = "RSA_4096"
+}
+
+variable "signing_algorithm" {
+  description = "Signing algorithm for the Certificate Authority"
+  type        = string
+  default     = "SHA512WITHRSA"
+}
+
+variable "subject_common_name" {
+  description = "Common name for the Certificate Authority subject"
+  type        = string
+  default     = "example.com"
+}
+
+variable "template_arn" {
+  description = "ARN of the template to use for issuing the certificate"
+  type        = string
+  default     = "arn:aws:acm-pca:::template/RootCACertificate/V1"
+}
+
+variable "validity_type" {
+  description = "Type of validity period for the certificate"
+  type        = string
+  default     = "YEARS"
+}
+
+variable "validity_value" {
+  description = "Value of validity period for the certificate"
+  type        = number
+  default     = 10
+}

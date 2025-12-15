@@ -506,5 +506,5 @@ No modules.
 | <a name="output_certificate"></a> [certificate](#output\_certificate) | PEM-encoded certificate for the Certificate Authority |
 | <a name="output_certificate_authority_arn"></a> [certificate\_authority\_arn](#output\_certificate\_authority\_arn) | ARN of the Certificate Authority |
 | <a name="output_certificate_chain"></a> [certificate\_chain](#output\_certificate\_chain) | PEM-encoded certificate chain |
-| <a name="output_id"></a> [id](#output\_id) | ARN of the certificate |
+| <a name="output_id"></a> [id](#output\_id) | Certificate Authority ARN (same as certificate\_authority\_arn) |
 <!-- END_TF_DOCS -->

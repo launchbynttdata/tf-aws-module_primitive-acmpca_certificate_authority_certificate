@@ -21,8 +21,16 @@ func TestComposableComplete(t *testing.T, ctx testTypes.TestContext) {
 	// Get outputs from Terraform
 	certificateAuthorityArn := terraform.Output(t, ctx.TerratestTerraformOptions(), "certificate_authority_arn")
 	certificate := terraform.Output(t, ctx.TerratestTerraformOptions(), "certificate")
-	certificateChain := terraform.Output(t, ctx.TerratestTerraformOptions(), "certificate_chain")
 	id := terraform.Output(t, ctx.TerratestTerraformOptions(), "id")
+
+	// Certificate chain is optional - use OutputMap to safely retrieve it
+	outputs := terraform.OutputAll(t, ctx.TerratestTerraformOptions())
+	certificateChain := ""
+	if val, ok := outputs["certificate_chain"]; ok && val != nil {
+		if strVal, isString := val.(string); isString {
+			certificateChain = strVal
+		}
+	}
 
 	t.Run("TestCertificateAuthorityArnValid", func(t *testing.T) {
 		testCertificateAuthorityArnValid(t, certificateAuthorityArn)
@@ -92,10 +100,16 @@ func testCertificateMatchesAWS(t *testing.T, client *acmpca.Client, arn string, 
 	assert.NotNil(t, getCaCertOutput.Certificate, "Certificate should exist in AWS")
 	assert.Equal(t, certificate, *getCaCertOutput.Certificate, "Certificate from Terraform should match AWS")
 
-	// If certificate chain was provided, verify it matches
+	// Handle certificate chain validation
 	if certificateChain != "" {
+		// Certificate chain was provided in Terraform - verify it exists and matches in AWS
 		assert.NotNil(t, getCaCertOutput.CertificateChain, "Certificate chain should exist in AWS when provided")
 		assert.Equal(t, certificateChain, *getCaCertOutput.CertificateChain, "Certificate chain from Terraform should match AWS")
+	} else {
+		// Certificate chain was not provided - verify it doesn't exist in AWS or is empty
+		if getCaCertOutput.CertificateChain != nil {
+			assert.Empty(t, *getCaCertOutput.CertificateChain, "Certificate chain should be empty in AWS when not provided")
+		}
 	}
 }
 

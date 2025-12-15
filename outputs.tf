@@ -22,10 +22,10 @@ output "certificate_authority_arn" {
 
 output "certificate_chain" {
   description = "PEM-encoded certificate chain"
-  value       = aws_acmpca_certificate_authority_certificate.this.certificate_chain
+  value       = aws_acmpca_certificate_authority_certificate.this.certificate_chain != "" ? aws_acmpca_certificate_authority_certificate.this.certificate_chain : null
 }
 
 output "id" {
-  description = "ARN of the certificate"
+  description = "Certificate Authority ARN (same as certificate_authority_arn)"
   value       = aws_acmpca_certificate_authority_certificate.this.id
 }
