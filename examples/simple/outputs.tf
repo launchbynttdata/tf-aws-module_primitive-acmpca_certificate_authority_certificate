@@ -26,6 +26,6 @@ output "certificate_chain" {
 }
 
 output "id" {
-  description = "ARN of the certificate"
+  description = "Certificate Authority ARN (same as certificate_authority_arn)"
   value       = module.certificate_authority_certificate.id
 }

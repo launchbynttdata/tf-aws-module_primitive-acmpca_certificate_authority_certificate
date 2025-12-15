@@ -12,14 +12,14 @@
 
 # Create a Certificate Authority for testing
 resource "aws_acmpca_certificate_authority" "test" {
-  type = "ROOT"
+  type = var.certificate_authority_type
 
   certificate_authority_configuration {
-    key_algorithm     = "RSA_4096"
-    signing_algorithm = "SHA512WITHRSA"
+    key_algorithm     = var.key_algorithm
+    signing_algorithm = var.signing_algorithm
 
     subject {
-      common_name = "example.com"
+      common_name = var.subject_common_name
     }
   }
 }
@@ -28,13 +28,13 @@ resource "aws_acmpca_certificate_authority" "test" {
 resource "aws_acmpca_certificate" "test" {
   certificate_authority_arn   = aws_acmpca_certificate_authority.test.arn
   certificate_signing_request = aws_acmpca_certificate_authority.test.certificate_signing_request
-  signing_algorithm           = "SHA512WITHRSA"
+  signing_algorithm           = var.signing_algorithm
 
-  template_arn = "arn:aws:acm-pca:::template/RootCACertificate/V1"
+  template_arn = var.template_arn
 
   validity {
-    type  = "YEARS"
-    value = 10
+    type  = var.validity_type
+    value = var.validity_value
   }
 }
 

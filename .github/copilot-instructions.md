@@ -70,8 +70,8 @@ Follow this standardized module structure:
 ### Coding Standards
 
 - Maintain consistency with existing patterns across all files.
-- Use `dynamic` blocks when a nested configuration block may appear 0-to-many times. Avoid for simple conditional inclusion.
 - Always validate configurations with `terraform validate` before planning or applying.
+- When building multiple examples ensure that they use common "outputs" to deduplicate testing functions.
 
 ## Testing Guidelines
 

@@ -11,11 +11,11 @@
 // limitations under the License.
 
 locals {
-  # Use the CA ARN from the test CA or from var if provided
-  certificate_authority_arn = coalesce(var.certificate_authority_arn, aws_acmpca_certificate_authority.test.arn)
+  # Use the CA ARN from var if provided, otherwise from the test CA
+  certificate_authority_arn = var.certificate_authority_arn != "" ? var.certificate_authority_arn : aws_acmpca_certificate_authority.test.arn
 
-  # Use the certificate from issued certificate or from var if provided
-  certificate = coalesce(var.certificate, aws_acmpca_certificate.test.certificate)
+  # Use the certificate from var if provided, otherwise from the issued certificate
+  certificate = var.certificate != "" ? var.certificate : aws_acmpca_certificate.test.certificate
 
   # Certificate chain is optional
   certificate_chain = var.certificate_chain
