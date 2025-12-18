@@ -19,5 +19,5 @@ jobs:
     with:
       assume_role_arn: ${{ vars.TERRAFORM_CHECK_AWS_ASSUME_ROLE_ARN }}
       region: ${{ vars.TERRAFORM_CHECK_AWS_REGION }}
-      GO_LINT_TIMEOUT: 30m
+      go_lint_timeout: 30m
     secrets: inherit # pragma: allowlist secret
