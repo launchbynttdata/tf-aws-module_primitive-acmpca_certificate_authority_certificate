@@ -3,7 +3,7 @@ module github.com/launchbynttdata/tf-aws-module_primitive-acmpca_certificate_aut
 go 1.25.5
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.41.0
+	github.com/aws/aws-sdk-go-v2 v1.41.1
 	github.com/aws/aws-sdk-go-v2/config v1.32.5
 	github.com/aws/aws-sdk-go-v2/service/acmpca v1.46.7
 	github.com/gruntwork-io/terratest v0.54.0
