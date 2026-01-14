@@ -3,9 +3,9 @@ module github.com/launchbynttdata/tf-aws-module_primitive-acmpca_certificate_aut
 go 1.25.5
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.41.0
+	github.com/aws/aws-sdk-go-v2 v1.41.1
 	github.com/aws/aws-sdk-go-v2/config v1.32.5
-	github.com/aws/aws-sdk-go-v2/service/acmpca v1.46.7
+	github.com/aws/aws-sdk-go-v2/service/acmpca v1.46.8
 	github.com/gruntwork-io/terratest v0.54.0
 	github.com/launchbynttdata/lcaf-component-terratest v1.0.4
 	github.com/stretchr/testify v1.11.1
@@ -19,8 +19,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/credentials v1.19.5 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.18.16 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.20.15 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.16 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.16 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.17 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.17 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.8.4 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/v4a v1.4.16 // indirect
 	github.com/aws/aws-sdk-go-v2/service/acm v1.37.18 // indirect
