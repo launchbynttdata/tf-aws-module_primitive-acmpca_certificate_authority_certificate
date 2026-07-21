@@ -51,12 +51,6 @@ This example creates its own test resources for demonstration purposes. In produ
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.5 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.100 |
 
-## Providers
-
-| Name | Version |
-|------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.100.0 |
-
 ## Modules
 
 | Name | Source | Version |
@@ -76,8 +70,8 @@ This example creates its own test resources for demonstration purposes. In produ
 |------|-------------|------|---------|:--------:|
 | <a name="input_certificate"></a> [certificate](#input\_certificate) | PEM-encoded certificate for the Certificate Authority | `string` | `""` | no |
 | <a name="input_certificate_authority_arn"></a> [certificate\_authority\_arn](#input\_certificate\_authority\_arn) | ARN of the Certificate Authority | `string` | `""` | no |
-| <a name="input_certificate_chain"></a> [certificate\_chain](#input\_certificate\_chain) | PEM-encoded certificate chain | `string` | `null` | no |
 | <a name="input_certificate_authority_type"></a> [certificate\_authority\_type](#input\_certificate\_authority\_type) | Type of the Certificate Authority | `string` | `"ROOT"` | no |
+| <a name="input_certificate_chain"></a> [certificate\_chain](#input\_certificate\_chain) | PEM-encoded certificate chain | `string` | `null` | no |
 | <a name="input_key_algorithm"></a> [key\_algorithm](#input\_key\_algorithm) | Key algorithm for the Certificate Authority | `string` | `"RSA_4096"` | no |
 | <a name="input_signing_algorithm"></a> [signing\_algorithm](#input\_signing\_algorithm) | Signing algorithm for the Certificate Authority | `string` | `"SHA512WITHRSA"` | no |
 | <a name="input_subject_common_name"></a> [subject\_common\_name](#input\_subject\_common\_name) | Common name for the Certificate Authority subject | `string` | `"example.com"` | no |
