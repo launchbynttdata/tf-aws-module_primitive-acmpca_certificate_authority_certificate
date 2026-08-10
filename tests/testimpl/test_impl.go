@@ -19,12 +19,12 @@ func TestComposableComplete(t *testing.T, ctx testTypes.TestContext) {
 	acmpcaClient := GetAWSACMPCAClient(t)
 
 	// Get outputs from Terraform
-	certificateAuthorityArn := terraform.Output(t, ctx.TerratestTerraformOptions(), "certificate_authority_arn")
-	certificate := terraform.Output(t, ctx.TerratestTerraformOptions(), "certificate")
-	id := terraform.Output(t, ctx.TerratestTerraformOptions(), "id")
+	certificateAuthorityArn := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "certificate_authority_arn")
+	certificate := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "certificate")
+	id := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "id")
 
 	// Certificate chain is optional - use OutputMap to safely retrieve it
-	outputs := terraform.OutputAll(t, ctx.TerratestTerraformOptions())
+	outputs := terraform.OutputAllContext(t, context.Background(), ctx.TerratestTerraformOptions())
 	certificateChain := ""
 	if val, ok := outputs["certificate_chain"]; ok && val != nil {
 		if strVal, isString := val.(string); isString {
